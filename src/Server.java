@@ -7,11 +7,24 @@ public class Server {
     private ServerSocket serverSocket;
     private IMessageBroadcaster broadcaster;
     private int maxClients;
+    private ServerGUI serverGUI;  // Добавляем ссылку на GUI
 
     public Server(ServerSocket serverSocket, int maxClients) {
         this.serverSocket = serverSocket;
         this.maxClients = maxClients;
         this.broadcaster = new MessageBroadcaster(maxClients);
+        this.serverGUI = new ServerGUI();  // Создаем GUI
+        displayServerInfo();
+    }
+
+    private void displayServerInfo() {
+        try {
+            String hostAddress = serverSocket.getInetAddress().getHostAddress();
+            int port = serverSocket.getLocalPort();
+            serverGUI.updateStatus("Server running at " + hostAddress + ":" + port);
+        } catch (Exception e) {
+            serverGUI.updateStatus("Error retrieving server info: " + e.getMessage());
+        }
     }
 
     public void startServer() {
@@ -19,7 +32,7 @@ public class Server {
             while (!serverSocket.isClosed()) {
                 if (broadcaster.getClientCount() < maxClients) {
                     Socket socket = serverSocket.accept();
-                    System.out.println("A new client has connected.");
+                    serverGUI.updateStatus("New client connected: " + socket.getRemoteSocketAddress());
                     ClientHandler clientHandler = new ClientHandler(socket, broadcaster);
                     Thread thread = new Thread(clientHandler);
                     thread.start();
@@ -27,6 +40,7 @@ public class Server {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            serverGUI.updateStatus("Server error: " + e.getMessage());
         }
     }
 
@@ -35,7 +49,7 @@ public class Server {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
                 new String[]{"Private (2 users)", "Public (10 users)"}, "Public (10 users)") == 0 ? 2 : 10;
 
-        ServerSocket serverSocket = new ServerSocket(1234);
+        ServerSocket serverSocket = new ServerSocket(1234); // Или другой порт
         Server server = new Server(serverSocket, maxClients);
         server.startServer();
     }
