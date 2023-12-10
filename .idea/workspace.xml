@@ -9,8 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="210f641c-1738-4bef-b2af-cc1e4e31e743" name="Changes" comment="version 1.2.1.1 Message encrypt via CaesarCipher">
-      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
+    <list default="true" id="210f641c-1738-4bef-b2af-cc1e4e31e743" name="Changes" comment="Add readme💀">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +45,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RunManager">
@@ -137,7 +138,21 @@
       <option name="project" value="LOCAL" />
       <updated>1702237030483</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="version 1.2.1.2 Simple server GUI">
+      <created>1702238512015</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1702238512015</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Add readme💀">
+      <created>1702238865050</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1702238865050</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -159,6 +174,8 @@
     <MESSAGE value="version 1.2.0.5 Save chat history method" />
     <MESSAGE value="version 1.2.0.1 Save chat history method" />
     <MESSAGE value="version 1.2.1.1 Message encrypt via CaesarCipher" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 1.2.1.1 Message encrypt via CaesarCipher" />
+    <MESSAGE value="version 1.2.1.2 Simple server GUI" />
+    <MESSAGE value="Add readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add readme" />
   </component>
 </project>
