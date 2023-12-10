@@ -1,87 +1,73 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.List;
 
-public class ClientHandler  implements Runnable{
+public class ClientHandler implements Runnable {
 
-    public static ArrayList<ClientHandler>clientHandlers = new ArrayList<>();
-    public Socket socket;
+    private Socket socket;
     private BufferedReader buffReader;
     private BufferedWriter buffWriter;
-    private String name;
+    private String clientName;
+    private IMessageBroadcaster broadcaster;
 
-    public ClientHandler(Socket socket){
-        // Constructors of all the private classes
-        try{
+    public ClientHandler(Socket socket, IMessageBroadcaster broadcaster) {
+        try {
             this.socket = socket;
-            this.buffWriter = new BufferedWriter( new OutputStreamWriter(socket.getOutputStream()));
+            this.buffWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.buffReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.name = buffReader.readLine();
-            clientHandlers.add(this);
-            boradcastMessage("SERVER" + name + " has entered in the room");
-
-        } catch(IOException e){
-            closeAll(socket, buffReader, buffWriter);
+            this.clientName = buffReader.readLine();
+            this.broadcaster = broadcaster;
+            broadcaster.addClient(this);
+            broadcastMessage("SERVER: " + clientName + " has entered the room");
+        } catch (IOException e) {
+            closeResources();
         }
     }
-    // run method override
+
     @Override
     public void run() {
-
         String messageFromClient;
-
-        while(socket.isConnected()){
-            try{
+        while (socket.isConnected()) {
+            try {
                 messageFromClient = buffReader.readLine();
-                boradcastMessage(messageFromClient);
-            } catch(IOException e){
-                closeAll(socket, buffReader,  buffWriter);
+                broadcastMessage(messageFromClient);
+            } catch (IOException e) {
+                closeResources();
                 break;
             }
         }
     }
-    public void boradcastMessage(String messageToSend){
-        for(ClientHandler clientHandler: clientHandlers){
-            try{
-                if(!clientHandler.name.equals(name)){
-                    clientHandler.buffWriter.write(messageToSend);
-                    clientHandler.buffWriter.newLine();
-                    clientHandler.buffWriter.flush();
-                }
-            } catch(IOException e){
-                closeAll(socket,buffReader, buffWriter);
 
-            }
-        }
-    }
-    // notify if the user left the chat
-    public void removeClientHandler(){
-        clientHandlers.remove(this);
-        boradcastMessage("server " + name + " has gone");
+    public void broadcastMessage(String messageToSend) {
+        broadcaster.broadcastMessage(messageToSend, this.clientName);
     }
 
-    public void closeAll(Socket socket, BufferedReader buffReader, BufferedWriter buffWriter){
-
-        // handle the removeClient funciton
-        removeClientHandler();
-        try{
-            if(buffReader!= null){
+    public void closeResources() {
+        broadcaster.removeClient(this);
+        try {
+            if (buffReader != null) {
                 buffReader.close();
             }
-            if(buffWriter != null){
+            if (buffWriter != null) {
                 buffWriter.close();
             }
-            if(socket != null){
+            if (socket != null) {
                 socket.close();
             }
-        } catch (IOException e){
-            e.getStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 
+    public String getClientName() {
+        return clientName;
+    }
+
+    public BufferedWriter getBufferedWriter() {
+        return buffWriter;
+    }
 }
