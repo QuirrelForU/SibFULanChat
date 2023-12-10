@@ -6,10 +6,20 @@ import java.util.List;
 public class MessageBroadcaster implements IMessageBroadcaster {
 
     private List<ClientHandler> clientHandlers = new ArrayList<>();
+    private final int maxClients;
+
+    public MessageBroadcaster(int maxClients) {
+        this.maxClients = maxClients;
+    }
 
     @Override
     public void addClient(ClientHandler client) {
-        clientHandlers.add(client);
+        if (clientHandlers.size() < maxClients) {
+            clientHandlers.add(client);
+            broadcastMessage("SERVER: " + client.getClientName() + " has entered the chat", null);
+        } else {
+            System.out.println("Maximum number of clients reached. Cannot add more clients.");
+        }
     }
 
     @Override
@@ -32,5 +42,9 @@ public class MessageBroadcaster implements IMessageBroadcaster {
                 client.closeResources();
             }
         }
+    }
+
+    public int getClientCount() {
+        return clientHandlers.size();
     }
 }
