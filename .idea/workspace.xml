@@ -9,10 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="210f641c-1738-4bef-b2af-cc1e4e31e743" name="Changes" comment="version 1.1.0.0">
-      <change beforePath="$PROJECT_DIR$/src/IMessageBroadcaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IMessageBroadcaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MessageBroadcaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MessageBroadcaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
+    <list default="true" id="210f641c-1738-4bef-b2af-cc1e4e31e743" name="Changes" comment="version 1.2.0.0 Server Max users">
+      <change beforePath="$PROJECT_DIR$/src/ChatWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,13 +116,32 @@
       <option name="project" value="LOCAL" />
       <updated>1702227812856</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="version 1.2.0.0 Server Max users">
+      <created>1702233349415</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1702233349415</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="version 1.0.0.0" />
     <MESSAGE value="version 1.0.0.1" />
     <MESSAGE value="version 1.1.0.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 1.1.0.0" />
+    <MESSAGE value="version 1.2.0.0 Server Max users" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 1.2.0.0 Server Max users" />
   </component>
 </project>
