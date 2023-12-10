@@ -5,7 +5,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import javax.swing.*;
 
 public class Client {
 
@@ -13,6 +16,7 @@ public class Client {
     private BufferedReader buffReader;
     private BufferedWriter buffWriter;
     private String name;
+    private List<ChatObserver> observers = new ArrayList<>();
 
     public Client(Socket socket, String name) {
         try {
@@ -25,24 +29,30 @@ public class Client {
         }
     }
 
-    public void sendMessage() {
+    public void registerObserver(ChatObserver observer) {
+        observers.add(observer);
+    }
+
+    private void notifyObservers(String message) {
+        for (ChatObserver observer : observers) {
+            observer.update(message);
+        }
+    }
+
+    public void sendMessage(String message) {
         try {
-            buffWriter.write(name);
+            String fullMessage = name + ": " + message;
+            buffWriter.write(fullMessage);
             buffWriter.newLine();
             buffWriter.flush();
 
-            Scanner scanner = new Scanner(System.in);
-
-            while (socket.isConnected()) {
-                String messageToSend = scanner.nextLine();
-                buffWriter.write(name + ": " + messageToSend);
-                buffWriter.newLine();
-                buffWriter.flush();
-            }
+            // Обновляем окно чата с отправленным сообщением
+            notifyObservers(fullMessage);
         } catch (IOException e) {
             closeResources();
         }
     }
+
 
     public void readMessage() {
         new Thread(() -> {
@@ -50,7 +60,7 @@ public class Client {
             while (socket.isConnected()) {
                 try {
                     msgFromGroupChat = buffReader.readLine();
-                    System.out.println(msgFromGroupChat);
+                    notifyObservers(msgFromGroupChat);
                 } catch (IOException e) {
                     closeResources();
                 }
@@ -74,13 +84,28 @@ public class Client {
         }
     }
 
-    public static void main(String[] args) throws UnknownHostException, IOException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter your name:");
-        String name = scanner.nextLine();
-        Socket socket = new Socket("localhost", 1234);
-        Client client = new Client(socket, name);
-        client.readMessage();
-        client.sendMessage();
+
+    public static void main(String[] args) {
+        try {
+            // Запрос имени пользователя через графический интерфейс
+            String name = JOptionPane.showInputDialog(null, "Enter your name:", "Chat Client", JOptionPane.PLAIN_MESSAGE);
+            if (name == null || name.isEmpty()) {
+                System.out.println("No name entered. Exiting...");
+                return;
+            }
+
+            Socket socket = new Socket("localhost", 1234);
+            Client client = new Client(socket, name);
+
+            // Создание GUI для чата
+            SwingUtilities.invokeLater(() -> new ChatWindow(client));
+
+            // Запуск потока для чтения сообщений
+            client.readMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
 }
