@@ -17,6 +17,8 @@ public class Client {
     private BufferedWriter buffWriter;
     private String name;
     private List<ChatObserver> observers = new ArrayList<>();
+    private IMessageEncryptor encryptor = new CaesarCipherEncryptor();
+
 
     public Client(Socket socket, String name) {
         try {
@@ -41,13 +43,13 @@ public class Client {
 
     public void sendMessage(String message) {
         try {
-            String fullMessage = name + ": " + message;
+            String encryptedMessage = encryptor.encrypt(message);
+            String fullMessage = name + ": " + encryptedMessage;
             buffWriter.write(fullMessage);
             buffWriter.newLine();
             buffWriter.flush();
 
-            // Обновляем окно чата с отправленным сообщением
-            notifyObservers(fullMessage);
+            notifyObservers(name + ": " + message);
         } catch (IOException e) {
             closeResources();
         }
@@ -60,7 +62,8 @@ public class Client {
             while (socket.isConnected()) {
                 try {
                     msgFromGroupChat = buffReader.readLine();
-                    notifyObservers(msgFromGroupChat);
+                    String decryptedMessage = encryptor.decrypt(msgFromGroupChat);
+                    notifyObservers(decryptedMessage);
                 } catch (IOException e) {
                     closeResources();
                 }
@@ -81,6 +84,12 @@ public class Client {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void updateShift(int newShift) {
+        if (encryptor instanceof CaesarCipherEncryptor) {
+            ((CaesarCipherEncryptor)encryptor).setShift(newShift);
         }
     }
 

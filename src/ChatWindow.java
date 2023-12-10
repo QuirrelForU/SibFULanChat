@@ -11,6 +11,8 @@ public class ChatWindow extends JFrame implements ChatObserver {
     private JTextField inputField;
     private JButton sendButton;
     private JButton saveButton;
+    private JTextField shiftField;
+    private JButton updateShiftButton;
     private Client client;
 
     public ChatWindow(Client client) {
@@ -30,16 +32,28 @@ public class ChatWindow extends JFrame implements ChatObserver {
             inputField.setText("");
         });
 
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saveChatToFile();
+        saveButton.addActionListener(e -> saveChatToFile());
+
+        shiftField = new JTextField("3", 3); // Default shift value
+        updateShiftButton = new JButton("Update Shift");
+
+        updateShiftButton.addActionListener(e -> {
+            try {
+                int shift = Integer.parseInt(shiftField.getText());
+                client.updateShift(shift);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid Shift Value", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        panel.add(new JScrollPane(chatArea), BorderLayout.CENTER);
+        JPanel shiftPanel = new JPanel();
+        shiftPanel.add(new JLabel("Shift:"));
+        shiftPanel.add(shiftField);
+        shiftPanel.add(updateShiftButton);
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.add(shiftPanel, BorderLayout.NORTH);
+        topPanel.add(new JScrollPane(chatArea), BorderLayout.CENTER);
 
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new BorderLayout());
@@ -50,7 +64,7 @@ public class ChatWindow extends JFrame implements ChatObserver {
         bottomPanel.add(inputPanel, BorderLayout.CENTER);
         bottomPanel.add(saveButton, BorderLayout.EAST);
 
-        add(panel, BorderLayout.CENTER);
+        add(topPanel, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

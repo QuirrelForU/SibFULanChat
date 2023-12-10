@@ -9,8 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="210f641c-1738-4bef-b2af-cc1e4e31e743" name="Changes" comment="version 1.2.0.0 Server Max users">
+    <list default="true" id="210f641c-1738-4bef-b2af-cc1e4e31e743" name="Changes" comment="version 1.2.0.1 Save chat history method">
       <change beforePath="$PROJECT_DIR$/src/ChatWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702233349415</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="version 1.2.0.1 Save chat history method">
+      <created>1702235947503</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1702235947503</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -142,6 +150,8 @@
     <MESSAGE value="version 1.0.0.1" />
     <MESSAGE value="version 1.1.0.0" />
     <MESSAGE value="version 1.2.0.0 Server Max users" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 1.2.0.0 Server Max users" />
+    <MESSAGE value="version 1.2.0.5 Save chat history method" />
+    <MESSAGE value="version 1.2.0.1 Save chat history method" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 1.2.0.1 Save chat history method" />
   </component>
 </project>
