@@ -6,6 +6,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Класс ChatWindow представляет собой графический интерфейс пользователя для чат-клиента.
+ */
 public class ChatWindow extends JFrame implements ChatObserver {
     private JTextArea chatArea;
     private JTextField inputField;
@@ -15,6 +18,11 @@ public class ChatWindow extends JFrame implements ChatObserver {
     private JButton updateShiftButton;
     private Client client;
 
+    /**
+     * Конструктор для создания окна чата.
+     *
+     * @param client Экземпляр клиента, который используется для взаимодействия с сервером чата.
+     */
     public ChatWindow(Client client) {
         this.client = client;
         client.registerObserver(this);
@@ -72,11 +80,21 @@ public class ChatWindow extends JFrame implements ChatObserver {
         setVisible(true);
     }
 
+    /**
+     * Метод, вызываемый при получении нового сообщения чата.
+     * Добавляет полученное сообщение в область чата.
+     *
+     * @param message Новое сообщение, полученное от сервера чата.
+     */
     @Override
     public void update(String message) {
         chatArea.append(message + "\n");
     }
 
+    /**
+     * Метод для сохранения истории чата в файл.
+     * Запрашивает у пользователя место для сохранения файла и сохраняет историю чата.
+     */
     private void saveChatToFile() {
         try {
             JFileChooser fileChooser = new JFileChooser();

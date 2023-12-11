@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Scanner;
 import javax.swing.*;
 
+/**
+ * Класс Client управляет подключением к серверу чата, отправкой и получением сообщений.
+ */
 public class Client {
 
     private Socket socket;
@@ -19,7 +22,12 @@ public class Client {
     private List<ChatObserver> observers = new ArrayList<>();
     private IMessageEncryptor encryptor = new CaesarCipherEncryptor();
 
-
+    /**
+     * Конструктор для создания нового клиента чата.
+     *
+     * @param socket Сокет для подключения к серверу.
+     * @param name   Имя пользователя в чате.
+     */
     public Client(Socket socket, String name) {
         try {
             this.socket = socket;
@@ -31,16 +39,31 @@ public class Client {
         }
     }
 
+    /**
+     * Регистрирует наблюдателя для получения уведомлений о сообщениях чата.
+     *
+     * @param observer Наблюдатель, который будет уведомляться о новых сообщениях.
+     */
     public void registerObserver(ChatObserver observer) {
         observers.add(observer);
     }
 
+    /**
+     * Оповещает всех зарегистрированных наблюдателей о новом сообщении.
+     *
+     * @param message Сообщение для отправки наблюдателям.
+     */
     private void notifyObservers(String message) {
         for (ChatObserver observer : observers) {
             observer.update(message);
         }
     }
 
+    /**
+     * Отправляет сообщение на сервер чата.
+     *
+     * @param message Сообщение, которое нужно отправить.
+     */
     public void sendMessage(String message) {
         try {
             String encryptedMessage = encryptor.encrypt(message);
@@ -56,6 +79,9 @@ public class Client {
     }
 
 
+    /**
+     * Запускает поток для непрерывного чтения входящих сообщений от сервера.
+     */
     public void readMessage() {
         new Thread(() -> {
             String msgFromGroupChat;
@@ -71,6 +97,9 @@ public class Client {
         }).start();
     }
 
+    /**
+     * Закрывает сокет и потоки ввода\вывода.
+     */
     public void closeResources() {
         try {
             if (buffReader != null) {
@@ -87,9 +116,14 @@ public class Client {
         }
     }
 
+    /**
+     * Обновляет значение сдвига для шифрования сообщений.
+     *
+     * @param newShift Новое значение сдвига для шифра Цезаря.
+     */
     public void updateShift(int newShift) {
         if (encryptor instanceof CaesarCipherEncryptor) {
-            ((CaesarCipherEncryptor)encryptor).setShift(newShift);
+            ((CaesarCipherEncryptor) encryptor).setShift(newShift);
         }
     }
 
