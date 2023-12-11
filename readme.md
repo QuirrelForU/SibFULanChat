@@ -58,6 +58,9 @@ public class Client {
 }
 ```
 
+![Logo](readmedata/ClassDiagram.png)
+
+
 Когда Client получает сообщение, он уведомляет всех своих наблюдателей (ChatObserver), вызывая у них метод update.
 
 ## Паттерн, который не стоило бы применять: Прототип (Prototype)
