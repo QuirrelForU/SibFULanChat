@@ -2,21 +2,21 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="__Test:jar" />
+      <artifact name="Server:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="210f641c-1738-4bef-b2af-cc1e4e31e743" name="Changes" comment="Add javadoc💀">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="210f641c-1738-4bef-b2af-cc1e4e31e743" name="Changes" comment="version 1.2.2.0">
+      <change afterPath="$PROJECT_DIR$/prgrm_export/Client_jar.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prgrm_export/Server_jar.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readmedata/creation.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702275530215</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="version 1.2.2.0">
+      <created>1702551406575</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1702551406575</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -233,7 +240,8 @@
     <MESSAGE value="Add readme" />
     <MESSAGE value="Add readme" />
     <MESSAGE value="Add javadoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add javadoc" />
+    <MESSAGE value="version 1.2.2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 1.2.2.0" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
