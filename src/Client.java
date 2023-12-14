@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import javax.swing.*;
 
 /**
@@ -130,23 +128,35 @@ public class Client {
 
     public static void main(String[] args) {
         try {
-            // Запрос имени пользователя через графический интерфейс
+            String serverIP = JOptionPane.showInputDialog(null, "Enter server IP:", "Chat Client - Server IP", JOptionPane.PLAIN_MESSAGE);
+            if (serverIP == null || serverIP.isEmpty()) {
+                System.out.println("No server IP entered. Exiting...");
+                return;
+            }
+
+            String portStr = JOptionPane.showInputDialog(null, "Enter server port:", "Chat Client - Server Port", JOptionPane.PLAIN_MESSAGE);
+            if (portStr == null || portStr.isEmpty()) {
+                System.out.println("No server port entered. Exiting...");
+                return;
+            }
+            int port = Integer.parseInt(portStr);
+
             String name = JOptionPane.showInputDialog(null, "Enter your name:", "Chat Client", JOptionPane.PLAIN_MESSAGE);
             if (name == null || name.isEmpty()) {
                 System.out.println("No name entered. Exiting...");
                 return;
             }
 
-            Socket socket = new Socket("localhost", 1234);
+            Socket socket = new Socket(serverIP, port);
             Client client = new Client(socket, name);
 
-            // Создание GUI для чата
             SwingUtilities.invokeLater(() -> new ChatWindow(client));
 
-            // Запуск потока для чтения сообщений
             client.readMessage();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid port number. Exiting...");
         }
     }
 

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JOptionPane;
@@ -33,7 +34,7 @@ public class Server {
      */
     private void displayServerInfo() {
         try {
-            String hostAddress = serverSocket.getInetAddress().getHostAddress();
+            String hostAddress = InetAddress.getLocalHost().getHostAddress(); // Получаем локальный IP-адрес
             int port = serverSocket.getLocalPort();
             serverGUI.updateStatus("Server running at " + hostAddress + ":" + port);
         } catch (Exception e) {
@@ -62,11 +63,18 @@ public class Server {
     }
 
     public static void main(String[] args) throws IOException {
-        int maxClients = JOptionPane.showOptionDialog(null, "Select Chat Type", "Chat Server",
+        int option = JOptionPane.showOptionDialog(null, "Select Chat Type", "Chat Server",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-                new String[]{"Private (2 users)", "Public (10 users)"}, "Public (10 users)") == 0 ? 2 : 10;
+                new String[]{"Private (2 users)", "Public (10 users)"}, "Public (10 users)");
 
-        ServerSocket serverSocket = new ServerSocket(1234); // Или другой порт
+        if (option == -1) {
+            System.out.println("No option selected, server will not start.");
+            return;
+        }
+
+        int maxClients = option == 0 ? 2 : 10;
+
+        ServerSocket serverSocket = new ServerSocket(1234);
         Server server = new Server(serverSocket, maxClients);
         server.startServer();
     }

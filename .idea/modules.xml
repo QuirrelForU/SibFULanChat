@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/SibFULanChat.iml" filepath="$PROJECT_DIR$/SibFULanChat.iml" />
       <module fileurl="file://$PROJECT_DIR$/__LanChat.iml" filepath="$PROJECT_DIR$/__LanChat.iml" />
     </modules>
   </component>
