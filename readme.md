@@ -21,7 +21,7 @@
 3. Введите Port
 4. Нажмите на кнопку send (тем самым сервер определит подключенный клиент)
 
-![creation_n_connection](readmedata/creation.gif)
+<img src="readmedata/creation.gif" width="960" height="540">
 
 ## Соблюдение принципов SOLID
 
