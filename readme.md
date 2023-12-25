@@ -6,12 +6,12 @@
 В программе используется простейшее шифрование с помощью шифра Цезаря.
 
 ## Сборка проекта
+Перейдите в директорию src проекта, содержащую все необходимые java файлы
 Компилируем файлы java
 ```
 javac *.java
 ```
 ### Сборка сервера
-Перейдите в директорию src проекта, содержащую все необходимые java файлы
 Создайте файл манифеста 
 ```
 echo Main-Class: Server > manifestserver.txt
@@ -21,7 +21,6 @@ echo Main-Class: Server > manifestserver.txt
 jar cvfm Server.jar manifestserver.txt *.class
 ```
 ### Сборка клиента
-Перейдите в директорию src проекта, содержащую все необходимые java файлы
 Создайте файл манифеста
 ```
 echo Main-Class: Client > manifestclient.txt
