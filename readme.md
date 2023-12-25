@@ -18,6 +18,10 @@ jar cvfm Server.jar manifestserver.txt *.class
 ```
 ### Сборка клиента
 Перейдите в директорию src проекта, содержащую все необходимые java файлы
+Компилируем файлы java
+```
+javac *.java
+```
 Создайте файл манифеста
 ```
 echo Main-Class: Client > manifestclient.txt
