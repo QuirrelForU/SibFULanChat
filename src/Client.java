@@ -86,8 +86,12 @@ public class Client {
             while (socket.isConnected()) {
                 try {
                     msgFromGroupChat = buffReader.readLine();
-                    String decryptedMessage = encryptor.decrypt(msgFromGroupChat);
-                    notifyObservers(decryptedMessage);
+                    String [] parts = msgFromGroupChat.split(": ",2);
+                    String name = parts[0];
+                    String encryptedMessage = parts[1];
+                    String decryptedMessage = encryptor.decrypt(encryptedMessage);
+                    String fullMessage = name + decryptedMessage;
+                    notifyObservers(fullMessage);
                 } catch (IOException e) {
                     closeResources();
                 }
