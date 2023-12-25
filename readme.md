@@ -27,8 +27,6 @@ echo Main-Class: Client > manifestclient.txt
 jar cvfm Client.jar manifestclient.txt *.class
 ```
 ## Запуск
-**Для запуска приложения необходим JDK 20**
-
 ### Запуск сервера
 1. Запустите [Server](prgrm_export/Server_jar.jar)
 2. Выберите тип сервера (публичный/приватный)
